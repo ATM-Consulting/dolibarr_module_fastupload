@@ -253,11 +253,6 @@ class modFastUpload extends DolibarrModules
 	function init($options='')
 	{
 		$sql = array();
-		
-		define('INC_FROM_DOLIBARR',true);
-
-		dol_include_once('/fastupload/config.php');
-		dol_include_once('/fastupload/script/create-maj-base.php');
 
 		$result=$this->_load_tables('/fastupload/sql/');
 
