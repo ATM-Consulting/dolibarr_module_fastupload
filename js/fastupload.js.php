@@ -21,8 +21,9 @@ if ($max > 0)
 	$max_file_size = $max/1024; // Conversion Kb en Mb
 }
 
+// Define javascript type
+top_httphead('text/javascript; charset=UTF-8');
 ?>
-//<script type="text/javascript">
 $(document).ready( function() {
 	Dropzone.autoDiscover = false;
 	
@@ -104,4 +105,3 @@ $(document).ready( function() {
 	};
 	
 });
-//</scrip>
