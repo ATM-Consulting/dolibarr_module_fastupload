@@ -11,7 +11,7 @@ FastUpload=Fast Upload
 FASTUPLOAD_LIMIT_FILE_NUMBER=Maximale Anzahl der unterstützten Dateien für die Dropzone begrenzen
 FASTUPLOAD_ENABLE_AUTOUPLOAD=Automatischen Upload nach Drag&Drop oder Dateiauswahl aktivieren
 
-FastUpload_DefaultMessage=Dateien hier ablegen zum hochlagen (oder klicken)
+FastUpload_DefaultMessage=Dateien hier ablegen zum hochladen (oder klicken)
 FastUpload_FallbackMessage=Ihr Browser erlaubt keine Upload per Drag&Drop
 FastUpload_FallbackText=
 FastUpload_FileTooBig=Datei ist zu groß ({{filesize}}MB). Max Dateigröße: {{maxFilesize}}MB.
