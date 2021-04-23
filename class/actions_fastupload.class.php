@@ -101,6 +101,7 @@ class ActionsFastUpload
 						,fu_method = $("#formuserfile").attr("method")
 						,fu_paramName = $("#formuserfile input[type=file]").attr("name");
 
+					var options = "";
 
 					var dropzone_submit = $("#formuserfile input[type=submit]").parent().clone();
 					$(dropzone_submit).find("input[type=file]").remove();
@@ -126,7 +127,7 @@ class ActionsFastUpload
 		$this->resprints .= '
 
 					var dropzone_form = $("<form id=\'dropzone_form\' action=\'"+fu_action+"\' method=\'"+fu_method+"\' enctype=\'multipart/form-data\'></form>");
-					dropzone_form.append(options);
+					if(options !== "") dropzone_form.append(options);
 					dropzone_form.append(dropzone_div);
 					dropzone_form.append("<br /><div '.(!empty($conf->global->FASTUPLOAD_ENABLE_AUTOUPLOAD) ? 'style=\'display:none;\'' : '').'>"+dropzone_submit+"</div>");
 					if (dropzone_savingdocmask) dropzone_form.append(dropzone_savingdocmask);
