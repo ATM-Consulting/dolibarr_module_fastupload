@@ -6,6 +6,7 @@ ___
 
 ## RELEASE 1.1
 
+- FIX : ConcatPdf Compatibility - Admin Page *23/04/2021* - 1.1.2
 - FIX : External access module incompatibility *24/03/2021* - 1.1.1
 - FIX : Mime type error *20/10/2020*
 - NEW : Translation de_DE *20/10/2020*
