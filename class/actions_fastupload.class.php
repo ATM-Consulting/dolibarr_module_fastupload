@@ -76,8 +76,11 @@ class ActionsFastUpload
 	{
 		global $conf,$langs;
 
-		if (in_array('externalaccesspage', explode(':', $parameters['context']))){
+		if (in_array('externalaccesspage', explode(':', $parameters['context']))
+			|| (in_array('adminconcatpdf', explode(':', $parameters['context'])) && (float) DOL_VERSION < 12.0)
+		){
 			// n'est pas compatible avec le portail client
+			// ni avec le module concatpdf pour les versions dolibarr inférieures à la 12.0
 			return 0;
 		}
 
@@ -114,9 +117,16 @@ class ActionsFastUpload
 					var dropzone_div = $("<div class=\"dropzone center dz-clickable\"></div>");
 					dropzone_div.append($("<i class=\"upload-icon ace-icon fa fa-cloud-upload blue fa-3x\"></i><br>"));
 					dropzone_div.append($("<span class=\"bigger-150 grey\">'.(addslashes($langs->transnoentities('FastUpload_DefaultMessage'))).'</span>"));
-					dropzone_div.append($("<div id=\"dropzone-previews-box\" class=\"dz dropzone-previews dz-max-files-reached\"></div>"));
+					dropzone_div.append($("<div id=\"dropzone-previews-box\" class=\"dz dropzone-previews dz-max-files-reached\"></div>")); ';
+
+		if(in_array('adminconcatpdf', explode(':', $parameters['context']))) {
+			$this->resprints .= ' var options = "<div>' . preg_replace( "/\r|\n/", "", addslashes($parameters['options'])) . '</div>"';
+		}
+
+		$this->resprints .= '
 
 					var dropzone_form = $("<form id=\'dropzone_form\' action=\'"+fu_action+"\' method=\'"+fu_method+"\' enctype=\'multipart/form-data\'></form>");
+					dropzone_form.append(options);
 					dropzone_form.append(dropzone_div);
 					dropzone_form.append("<br /><div '.(!empty($conf->global->FASTUPLOAD_ENABLE_AUTOUPLOAD) ? 'style=\'display:none;\'' : '').'>"+dropzone_submit+"</div>");
 					if (dropzone_savingdocmask) dropzone_form.append(dropzone_savingdocmask);
