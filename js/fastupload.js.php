@@ -87,10 +87,9 @@ $(document).ready( function() {
 				},
 				// Never call under 4.0 version
 				successmultiple: function(files, response) {
-					let $response = $(response);
-					$("table.liste:first").replaceWith($response.find("table.liste:first")); // DOL_VERSION < 6.0
-					$("#tablelines").replaceWith($response.find("#tablelines"));             // DOL_VERSION >= 6.0
-					let $scriptEventMessages = $response.find('#fastupload_htmloutput_events');
+					$("table.liste:first").replaceWith($(response).find("table.liste:first")); // DOL_VERSION < 6.0
+					$("#tablelines").replaceWith($(response).find("#tablelines"));             // DOL_VERSION >= 6.0
+					let $scriptEventMessages = $(response).find('#fastupload_htmloutput_events');
 					if ($scriptEventMessages) {$(document.body).append($scriptEventMessages);}
 					this.removeAllFiles();
 				},

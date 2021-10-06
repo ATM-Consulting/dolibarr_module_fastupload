@@ -99,8 +99,6 @@ class ActionsFastUpload
 			return 0;
 		}
 
-//		$langs->load('fastupload@fastupload');
-
 		if ((float) DOL_VERSION < 6.0) {
 			$this->resprints = '<link rel="stylesheet" href="'.dol_buildpath('/fastupload/css/font-awesome.min.css', 1).'">';
 		}
@@ -117,9 +115,7 @@ class ActionsFastUpload
 				ARRAY_FILTER_USE_KEY
 			),
 			'langs' => $jsLangs->tab_translate,
-//			'DOL_VERSION' => DOL_VERSION,
 		);
-//		$this->_vardump2($phpContext);
 
 		// pour rappel: $(<fonction>) est équivalent à $(document).ready(<fonction>)
 		$this->resprints .=
@@ -132,81 +128,14 @@ class ActionsFastUpload
 		return 0;
 	}
 
-	/* INUTILISABLE CAR CE HOOK EST APPELÉ APRÈS LE VIDAGE DE LA SESSION */
-//	function printCommonFooter($parameters)
-//	{
-////		$TContext = explode(':', $parameters['context']);
-////		if (in_array('', $TContext)) {
-////
-////		}
-//		if (GETPOSTISSET('fastupload_ajax')) {
-//			$_SESSION['dol_events_backup'] = $_SESSION['dol_events'];
-//		} elseif (isset($_SESSION['dol_events_backup'])) {
-//			$_SESSION['dol_events'] = $_SESSION['dol_events_backup'];
-//			unset($_SESSION['dol_events_backup']);
-//		}
-//	}
-
-	function addHtmlHeader($parameters, &$user, &$action)
-	{
-		if (GETPOSTISSET('fastupload_ajax')) {
-//			ob_start();
-		}
-	}
 	function showFilesList($parameters, &$object)
 	{
-		global $db;
-		static $nbCalls = 0;
-		$nbCalls++;
-		if ($nbCalls > 1) {
-			return 0;
-		}
-//		$TContext = explode(':', $parameters['context']);
-//		if (in_array('', $TContext)) {
-//
-//		}
 		if (GETPOSTISSET('fastupload_ajax')) {
-//			$_SESSION['dol_events_backup'] = $_SESSION['dol_events'];
-//			$out = ob_get_clean();
 			ob_start();
 			dol_htmloutput_events();
 			$additional = ob_get_clean();
 			$additional = preg_replace('/<script([^>]*)>/', '<script $1 id="fastupload_htmloutput_events">', $additional);
 			echo $additional;
-//
-//			ob_start();
-//			$ff = new FormFile($db);
-//			$ff->list_of_documents(
-//				$parameters['filearray'],
-//				$parameters['modulepart'],
-//				$parameters['param'],
-//				$parameters['forcedownload'],
-//				$parameters['relativepath'],
-//				$parameters['relativedir'],
-//				$parameters['permtodelete'],
-//				$parameters['useinecm'],
-//				$parameters['textifempty'],
-//				$parameters['maxlength'],
-//				$parameters['title'],
-//				$parameters['url']
-//			);
-//			$out = ob_get_clean();
-//			$out = preg_replace(
-//				'/(<table[^>]* id="tablelines"[^>]+>)/',
-//				'$1' . $additional . '',
-//				$out, 1
-//			);
-//			echo $out;
-//			echo '<div id="tablelines"><script>alert("toto");</script></div>';
-			return 1;
-		} elseif (isset($_SESSION['dol_events_backup'])) {
-//			$_SESSION['dol_events'] = $_SESSION['dol_events_backup'];
-//			unset($_SESSION['dol_events_backup']);
 		}
-	}
-
-	private function _vardump2($v)
-	{
-		echo '<textarea style="width: 100%; height: 80vh">', json_encode($v, JSON_PRETTY_PRINT), '</pre>'; exit;
 	}
 }
