@@ -61,21 +61,11 @@ class ActionsFastUpload
 	 */
 	function doActions($parameters, &$object, &$action, $hookmanager)
 	{
-		$TContext = explode(':', $parameters['context']);
+		//$TContext = explode(':', $parameters['context']);
 		/*
-		 * IMPOSSIBLE D'UTILISER doActions ICI TANT QUE TOUTES LES PAGES D'UPLOAD N'ONT PAS UN
-		 * initHooks ET UN executeHook('doActions')
+		 * Impossible d'utiliser doActions ici tant qu'il reste des formulaires d'upload sans appel au hook doActions
 		 */
 	}
-
-	/* IMPOSSIBLE D'UTILISER CE HOOK, CE SONT LES HEADERS HTML ET NON LES HEADERS HTTP QUI SONT INTERCEPTÉS */
-//	function addHtmlHeader($parameters, &$user, &$action)
-//	{
-//		http_response_code(404);
-//		$parameters['headers_sent'] = headers_sent();
-//		echo '<pre>', json_encode($parameters, JSON_PRETTY_PRINT), '</pre>';
-//		return 1;
-//	}
 
 	/**
 	 * Overloading the doActions function : replacing the parent's function with the one below
@@ -134,7 +124,7 @@ class ActionsFastUpload
 			ob_start();
 			dol_htmloutput_events();
 			$additional = ob_get_clean();
-			$additional = preg_replace('/<script([^>]*)>/', '<script $1 id="fastupload_htmloutput_events">', $additional);
+			$additional = preg_replace('/<script([^>]*)>/', '<script $1 id="fastupload_htmloutput_events">', $additional, 1);
 			echo $additional;
 		}
 	}
