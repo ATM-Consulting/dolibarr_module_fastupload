@@ -120,6 +120,16 @@ class ActionsFastUpload
 
 	function showFilesList($parameters, &$object)
 	{
+		/*
+		 * #hack #CMMCM
+		 *  1) la page appelante fait un appel ajax à une page standard (ex: page des fichiers joints) qui passe par
+		 *     ce hook
+		 *  2) ce hook appelle `dol_htmloutput_events`, qui d'ordinaire printe directement le script d'affichage
+		 *     des événements, sauf qu'avec ob_start() et ob_get_clean(), on intercepte cette sortie pour ajouter
+		 *     un ID à la balise <script> (c'est ce que fait la regex)
+		 *  4) grâce à cet ID, le js qui a fait l'appel ajax peut désormais cibler ce script et faire en sorte qu'il
+		 *     soit exécuté
+		 */
 		if (GETPOSTISSET('fastupload_ajax')) {
 			ob_start();
 			dol_htmloutput_events();
