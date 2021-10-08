@@ -91,7 +91,7 @@ class modFastUpload extends DolibarrModules
 		//							'workflow' => array('WORKFLOW_MODULE1_YOURACTIONTYPE_MODULE2'=>array('enabled'=>'! empty($conf->module1->enabled) && ! empty($conf->module2->enabled)', 'picto'=>'yourpicto@fastupload')) // Set here all workflow context managed by module
 		//                        );
 		$this->module_parts = array(
-			'hooks' => array('formfile')
+			'hooks' => array('formfile', 'main')
 			,'css' => array('/fastupload/css/dropzone.css')
 			,'js' => array('/fastupload/js/dropzone.js', '/fastupload/js/fastupload.js.php')
 		);

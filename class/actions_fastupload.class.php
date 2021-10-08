@@ -61,6 +61,10 @@ class ActionsFastUpload
 	 */
 	function doActions($parameters, &$object, &$action, $hookmanager)
 	{
+		//$TContext = explode(':', $parameters['context']);
+		/*
+		 * Impossible d'utiliser doActions ici tant qu'il reste des formulaires d'upload sans appel au hook doActions
+		 */
 	}
 
 	/**
@@ -75,76 +79,63 @@ class ActionsFastUpload
 	function formattachOptions($parameters, &$object, &$action, $hookmanager)
 	{
 		global $conf,$langs;
+		$TContext = explode(':', $parameters['context']);
 
-		if (in_array('externalaccesspage', explode(':', $parameters['context']))
-			|| (in_array('adminconcatpdf', explode(':', $parameters['context'])) && (float) DOL_VERSION < 12.0)
+		if (in_array('externalaccesspage', $TContext)
+			|| (in_array('adminconcatpdf', $TContext) && (float) DOL_VERSION < 12.0)
 		){
 			// n'est pas compatible avec le portail client
 			// ni avec le module concatpdf pour les versions dolibarr inférieures à la 12.0
 			return 0;
 		}
 
-
-		$langs->load('fastupload@fastupload');
-
-		if ((float) DOL_VERSION < 6.0)
-		{
+		if ((float) DOL_VERSION < 6.0) {
 			$this->resprints = '<link rel="stylesheet" href="'.dol_buildpath('/fastupload/css/font-awesome.min.css', 1).'">';
 		}
+		$jsLangs = new Translate('', $conf);
+		$jsLangs->setDefaultLang($langs->defaultlang);
+		$jsLangs->load('fastupload@fastupload');
 
-		$this->resprints .= '
+		$phpContext = array(
+			'hookContexts' => $TContext,
+			'options' => isset($parameters['options']) ? $parameters['options'] : null,
+			'conf' => array_filter(
+				(array)$conf->global,
+				function ($v) { return strpos($v, 'FASTUPLOAD') !== false; },
+				ARRAY_FILTER_USE_KEY
+			),
+			'langs' => $jsLangs->tab_translate,
+		);
 
-			<script type="text/javascript">
-
-				$(document).ready( function() {
-					var fu_action = $("#formuserfile").attr("action")
-						,fu_method = $("#formuserfile").attr("method")
-						,fu_paramName = $("#formuserfile input[type=file]").attr("name");
-
-					var options = "";
-
-					var dropzone_submit = $("#formuserfile input[type=submit]").parent().clone();
-					$(dropzone_submit).find("input[type=file]").remove();
-					dropzone_submit = $(dropzone_submit).html();
-
-					var dropzone_savingdocmask = "";
-					if ($("#formuserfile input[name=savingdocmask]").length > 0)
-					{
-						dropzone_savingdocmask = $("#formuserfile input[name=savingdocmask]").parent().clone();
-						dropzone_savingdocmask = $("<div class=\'dropzone_savingdocmask\'>"+dropzone_savingdocmask.html()+"</div>");
-
-					}
-
-					var dropzone_div = $("<div class=\"dropzone center dz-clickable\"></div>");
-					dropzone_div.append($("<i class=\"upload-icon ace-icon fa fa-cloud-upload blue fa-3x\"></i><br>"));
-					dropzone_div.append($("<span class=\"bigger-150 grey\">'.(addslashes($langs->transnoentities('FastUpload_DefaultMessage'))).'</span>"));
-					dropzone_div.append($("<div id=\"dropzone-previews-box\" class=\"dz dropzone-previews dz-max-files-reached\"></div>")); ';
-
-		if(in_array('adminconcatpdf', explode(':', $parameters['context']))) {
-			$this->resprints .= ' var options = "<div>' . preg_replace( "/\r|\n/", "", addslashes($parameters['options'])) . '</div>"';
-		}
-
-		$this->resprints .= '
-
-					var dropzone_form = $("<form id=\'dropzone_form\' action=\'"+fu_action+"\' method=\'"+fu_method+"\' enctype=\'multipart/form-data\'></form>");
-					if(options !== "") dropzone_form.append(options);
-					dropzone_form.append(dropzone_div);
-					dropzone_form.append("<br /><div '.(!empty($conf->global->FASTUPLOAD_ENABLE_AUTOUPLOAD) ? 'style=\'display:none;\'' : '').'>"+dropzone_submit+"</div>");
-					if (dropzone_savingdocmask) dropzone_form.append(dropzone_savingdocmask);
-
-
-					$("#formuserfile").hide();
-					$("#formuserfile").after(dropzone_form);
-
-					fu_paramName = fu_paramName.replace("[", "");
-					fu_paramName = fu_paramName.replace("]", "");
-
-					enableDropzone($(dropzone_form), fu_paramName);
-
-				});
-			</script>
-		';
+		// pour rappel: $(<fonction>) est équivalent à $(document).ready(<fonction>)
+		$this->resprints .=
+			'<script type="text/javascript">'
+			. '$(function() {'
+			. '    FastUpload && FastUpload.overrideForm(' . json_encode($phpContext) . ')'
+			. '});'
+			. '</script>';
 
 		return 0;
+	}
+
+	function showFilesList($parameters, &$object)
+	{
+		/*
+		 * #hack #CMMCM
+		 *  1) la page appelante fait un appel ajax à une page standard (ex: page des fichiers joints) qui passe par
+		 *     ce hook
+		 *  2) ce hook appelle `dol_htmloutput_events`, qui d'ordinaire printe directement le script d'affichage
+		 *     des événements, sauf qu'avec ob_start() et ob_get_clean(), on intercepte cette sortie pour ajouter
+		 *     un ID à la balise <script> (c'est ce que fait la regex)
+		 *  4) grâce à cet ID, le js qui a fait l'appel ajax peut désormais cibler ce script et faire en sorte qu'il
+		 *     soit exécuté
+		 */
+		if (GETPOSTISSET('fastupload_ajax')) {
+			ob_start();
+			dol_htmloutput_events();
+			$additional = ob_get_clean();
+			$additional = preg_replace('/<script([^>]*)>/', '<script $1 id="fastupload_htmloutput_events">', $additional, 1);
+			echo $additional;
+		}
 	}
 }
