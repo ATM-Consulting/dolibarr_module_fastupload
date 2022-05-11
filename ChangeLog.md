@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 ___
 
 ## Unreleased
+- NEW : Ajout de la class TechATM pour l'affichage de la page "A propos" *11/05/2022* 1.2.0
 
 ## RELEASE 1.1
 - FIX : v14 compatibility - *12/10/2021* - 1.1.3
