@@ -5,6 +5,7 @@ ___
 ## Unreleased
 
 ## RELEASE 1.1
+- FIX: change family name - *02/06/2022* - 3.1.5
 - FIX : v14 compatibility - *12/10/2021* - 1.1.3
 - FIX : ConcatPdf Compatibility - Admin Page *23/04/2021* - 1.1.2
 - FIX : External access module incompatibility *24/03/2021* - 1.1.1
