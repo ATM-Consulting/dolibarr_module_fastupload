@@ -137,5 +137,6 @@ class ActionsFastUpload
 			$additional = preg_replace('/<script([^>]*)>/', '<script $1 id="fastupload_htmloutput_events">', $additional, 1);
 			echo $additional;
 		}
+		return 0;
 	}
 }
