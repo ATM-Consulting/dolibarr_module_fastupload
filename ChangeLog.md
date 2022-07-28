@@ -6,7 +6,7 @@ ___
 - NEW : Ajout de la class TechATM pour l'affichage de la page "A propos" *11/05/2022* 1.2.0
 
 ## RELEASE 1.1
-- FIX : Correction pour compatibilité PHP8 - *28/07/2022* - 1.1.4
+- FIX : Correction pour compatibilité PHP8 - *28/07/2022* - 1.2.0
 - FIX : v14 compatibility - *12/10/2021* - 1.1.3
 - FIX : ConcatPdf Compatibility - Admin Page *23/04/2021* - 1.1.2
 - FIX : External access module incompatibility *24/03/2021* - 1.1.1
