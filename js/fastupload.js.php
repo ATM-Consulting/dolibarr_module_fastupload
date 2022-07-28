@@ -10,7 +10,7 @@ $max_file_size = 0;
 
 // Dolibarr style @see html.formfile.php::form_attach_new_file
 $max=$conf->global->MAIN_UPLOAD_DOC;		// En Kb
-$maxphp=@ini_get('upload_max_filesize');	// En inconnu
+$maxphp=@ini_get('upload_max_filesize')?:0;	// En inconnu
 if (preg_match('/k$/i',$maxphp)) $maxphp=$maxphp*1;
 if (preg_match('/m$/i',$maxphp)) $maxphp=$maxphp*1024;
 if (preg_match('/g$/i',$maxphp)) $maxphp=$maxphp*1024*1024;
