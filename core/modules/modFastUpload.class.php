@@ -61,7 +61,7 @@ class modFastUpload extends DolibarrModules
 		// Module description, used if translation string 'ModuleXXXDesc' not found (where XXX is value of numeric property 'numero' of module)
 		$this->description = "Permet d'envoyer des documents par glisser-déposer en utilisant le plug-in Dropzone";
 		// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
-		$this->version = '1.2.0';
+		$this->version = '1.2.1';
 		// Url to the file with your last numberversion of this module
 		require_once __DIR__ . '/../../class/techatm.class.php';
 		$this->url_last_version = \fastupload\TechATM::getLastModuleVersionUrl($this);
