@@ -6,6 +6,7 @@ ___
 - NEW : Ajout de la class TechATM pour l'affichage de la page "A propos" *11/05/2022* 1.2.0
 
 ## RELEASE 1.1
+- FIX: change family name - *02/06/2022* - 1.1.5
 - FIX: Compatibility V16 - Token - *03/06/2022* - 1.1.4
 - FIX : v14 compatibility - *12/10/2021* - 1.1.3
 - FIX : ConcatPdf Compatibility - Admin Page *23/04/2021* - 1.1.2
