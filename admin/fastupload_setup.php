@@ -118,7 +118,7 @@ print '<td align="right" width="300">';
 print '<form method="POST" action="'.$_SERVER['PHP_SELF'].'">';
 print '<input type="hidden" name="token" value="'.$newToken.'">';
 print '<input type="hidden" name="action" value="set_FASTUPLOAD_LIMIT_FILE_NUMBER">';
-print '<input type="number" name="FASTUPLOAD_LIMIT_FILE_NUMBER" value="'.$conf->global->FASTUPLOAD_LIMIT_FILE_NUMBER.'" />';
+print '<input type="number" name="FASTUPLOAD_LIMIT_FILE_NUMBER" value="'.getDolGlobalString('FASTUPLOAD_LIMIT_FILE_NUMBER').'" />';
 print '<input type="submit" class="button" value="'.$langs->trans("Modify").'">';
 print '</form>';
 print '</td></tr>';

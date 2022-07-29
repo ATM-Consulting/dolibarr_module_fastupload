@@ -49,7 +49,7 @@ function fastuploadAdminPrepareHead()
     //$this->tabs = array(
     //	'entity:-tabname:Title:@fastupload:/fastupload/mypage.php?id=__ID__'
     //); // to remove a tab
-    complete_head_from_modules($conf, $langs, $object, $head, $h, 'fastupload');
+    complete_head_from_modules($conf, $langs, null, $head, $h, 'fastupload');
 
     return $head;
 }
