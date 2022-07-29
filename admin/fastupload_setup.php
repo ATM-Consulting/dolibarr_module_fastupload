@@ -36,6 +36,9 @@ require_once '../lib/fastupload.lib.php';
 $langs->load('admin');
 $langs->load('fastupload@fastupload');
 
+$newToken = function_exists('newToken') ? newToken() : $_SESSION['newtoken'];
+
+
 // Access control
 if (! $user->admin) {
     accessforbidden();
@@ -113,7 +116,7 @@ print '<td>'.$langs->trans("FASTUPLOAD_LIMIT_FILE_NUMBER").'</td>';
 print '<td align="center" width="20">&nbsp;</td>';
 print '<td align="right" width="300">';
 print '<form method="POST" action="'.$_SERVER['PHP_SELF'].'">';
-print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
+print '<input type="hidden" name="token" value="'.$newToken.'">';
 print '<input type="hidden" name="action" value="set_FASTUPLOAD_LIMIT_FILE_NUMBER">';
 print '<input type="number" name="FASTUPLOAD_LIMIT_FILE_NUMBER" value="'.getDolGlobalString('FASTUPLOAD_LIMIT_FILE_NUMBER').'" />';
 print '<input type="submit" class="button" value="'.$langs->trans("Modify").'">';
@@ -126,7 +129,7 @@ print '<td>'.$langs->trans("FASTUPLOAD_ENABLE_AUTOUPLOAD").'</td>';
 print '<td align="center" width="20">&nbsp;</td>';
 print '<td align="center" width="300">';
 print '<form method="POST" action="'.$_SERVER['PHP_SELF'].'">'; // Keep form because ajax_constantonoff return single link with <a> if the js is disabled
-print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
+print '<input type="hidden" name="token" value="'.$newToken.'">';
 print '<input type="hidden" name="action" value="set_FASTUPLOAD_ENABLE_AUTOUPLOAD">';
 print ajax_constantonoff('FASTUPLOAD_ENABLE_AUTOUPLOAD');
 print '</form>';
