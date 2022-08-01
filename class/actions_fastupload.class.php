@@ -135,7 +135,7 @@ class ActionsFastUpload
 			dol_htmloutput_events();
 			$additional = ob_get_clean();
 			$additional = preg_replace('/<script([^>]*)>/', '<script $1 id="fastupload_htmloutput_events">', $additional, 1);
-			echo $additional;
+			$this->resprints = $additional;
 		}
 		return 0;
 	}
