@@ -31,6 +31,8 @@ if ($max > 0)
 	$max_file_size = $max/1024; // Conversion Kb en Mb
 }
 
+$newToken = function_exists('newToken') ? newToken() : $_SESSION['newtoken'];
+
 // Define javascript type
 top_httphead('text/javascript; charset=UTF-8');
 ?>
@@ -163,7 +165,7 @@ $(document).ready( function() {
 			+ '</div>'
 		);
 		if (dropzone_savingdocmask) dropzone_form.append(dropzone_savingdocmask);
-		dropzone_form.append($('<input type="hidden" name="fastupload_ajax" value="1" />'));
+		dropzone_form.append($('<input type="hidden" name="fastupload_ajax" value="1" /><input type="hidden" name="token" value="<?php print $newToken; ?>" />'));
 
 
 		$formuserfile.hide();
