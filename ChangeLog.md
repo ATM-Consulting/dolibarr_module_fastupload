@@ -4,6 +4,7 @@ ___
 
 ## Unreleased
 
+- FIX : token - *02/08/2022* - 1.2.2
 - FIX : Correction pour compatibilité PHP8 - *28/07/2022* - 1.2.1
 - NEW : Ajout de la class TechATM pour l'affichage de la page "A propos" *11/05/2022* 1.2.0
 
