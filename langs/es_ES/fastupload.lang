@@ -1,0 +1,26 @@
+Module104742Name = Fast upload
+Module104742Desc = Permite subir ficheros usando drag'n'drop
+
+ATMAbout = Este módulo se ha desarrolado por <a href="http://www.atm-consulting.fr" target="_blank">ATM Consulting</a><br>Puedes encontrar la documentación en la <a href="http://wiki.atm-consulting.fr/index.php/Accueil" target="_blank">wiki</a><br><br>Para cualquier pregunta o sugerencia, contáctanos en <a href="mailto:support@atm-consulting.fr">support@atm-consulting.fr</a><br><br>Para cualquier pregunta comercial, contáctanos en <a href="mailto:contact@atm-consulting.fr">contact@atm-consulting.fr</a> o en el teléfono +33 9 77 19 50 70<br><br>Encuentra otros módulos en <a href="http://www.dolistore.com/search.php?orderby=position&orderway=desc&search_query=atm&submit_search=Rechercher" target="_blank">Dolistore</a>
+
+FastUploadSetup = Configuración módulo Fast upload
+FastUploadAbout = Sobre Fast upload
+
+FastUpload=Fast upload
+
+FASTUPLOAD_LIMIT_FILE_NUMBER=Limitar el número máximo de ficheros que serán manejados en la zona de drag'n'drop
+FASTUPLOAD_ENABLE_AUTOUPLOAD=Activar la subida automática de ficheros al soltar en la zona de drag'n'drop
+
+FastUpload_DefaultMessage=Arrastrar ficheros aquí para subir (o hacer click)
+FastUpload_FallbackMessage=Tu navegador no soporta la característica drag'n'drop.
+FastUpload_FallbackText=
+FastUpload_FileTooBig=El fichero es demasiado grande ({{filesize}}MiB). El máximo permitido es: {{maxFilesize}}MiB.
+FastUpload_InvalidFileType=No es posible subir ficheros de este tipo.
+FastUpload_ResponseError=El servidor respondió con el código {{statusCode}}.
+FastUpload_CancelUpload=Cancelar subida
+FastUpload_CancelUploadConfirmation=Cancelar subida. ¿Estás seguro?
+FastUpload_RemoveFile=Borrar fichero
+FastUpload_RemoveFileConfirmation=Borrar fichero. ¿Estás seguro?
+FastUpload_MaxFilesExceeded=No es posible subir más ficheros.
+FastUpload_DropzoneNotSupported=Dropzone.js no soporta navegadores antíguos!
+
