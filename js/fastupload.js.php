@@ -9,7 +9,7 @@ $langs->load('fastupload@fastupload');
 $max_file_size = 0;
 
 // Dolibarr style @see html.formfile.php::form_attach_new_file
-$max=$conf->global->MAIN_UPLOAD_DOC;           // En Kb
+$max=getDolGlobalString('MAIN_UPLOAD_DOC');           // En Kb
 $maxphpstr=@ini_get('upload_max_filesize')?:0; // En inconnu
 
 // on recherche une série de chiffres (premier groupe de capture) suivi d'une lettre (optionnelle) parmi
@@ -46,8 +46,8 @@ $(document).ready( function() {
 
 			var zone_object = new Dropzone(form[0], {
 				paramName: paramName,
-				autoProcessQueue: <?php echo !empty($conf->global->FASTUPLOAD_ENABLE_AUTOUPLOAD) ? 'true' : 'false'; ?>,
-				addRemoveLinks: !<?php echo !empty($conf->global->FASTUPLOAD_ENABLE_AUTOUPLOAD) ? 'true' : 'false'; ?>,
+				autoProcessQueue: <?php echo !empty(getDolGlobalString('FASTUPLOAD_ENABLE_AUTOUPLOAD')) ? 'true' : 'false'; ?>,
+                    addRemoveLinks: !<?php echo !empty(getDolGlobalString('FASTUPLOAD_ENABLE_AUTOUPLOAD')) ? 'true' : 'false'; ?>,
 				clickable: zone_class,
 				previewsContainer: "#" + classPrefix + "-previews-box",
 				uploadMultiple: <?php echo (float) DOL_VERSION < 4.0 ? 'false' : 'true'; ?>,
@@ -66,7 +66,7 @@ $(document).ready( function() {
 										<div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n\n\
 									</div>",
 				maxFilesize: <?php echo $max_file_size; ?>,
-				maxFiles: <?php echo !empty($conf->global->FASTUPLOAD_LIMIT_FILE_NUMBER) ? $conf->global->FASTUPLOAD_LIMIT_FILE_NUMBER : 50; ?>,
+				maxFiles: <?php echo !empty(getDolGlobalInt('FASTUPLOAD_LIMIT_FILE_NUMBER')) ? getDolGlobalInt('FASTUPLOAD_LIMIT_FILE_NUMBER') : 50; ?>,
 				dictDefaultMessage: "<?php echo addslashes($langs->transnoentities('FastUpload_DefaultMessage')); ?>",
 				dictFallbackMessage: "<?php echo addslashes($langs->transnoentities('FastUpload_FallbackMessage')); ?>",
 				dictFallbackText: "<?php echo addslashes($langs->transnoentities('FastUpload_FallbackText')); ?>",
