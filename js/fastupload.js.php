@@ -66,7 +66,7 @@ $(document).ready( function() {
 										<div class=\"dz-error-message\"><span data-dz-errormessage></span></div>\n\n\
 									</div>",
 				maxFilesize: <?php echo $max_file_size; ?>,
-				maxFiles: <?php echo !empty(getDolGlobalInt('FASTUPLOAD_LIMIT_FILE_NUMBER')) ? getDolGlobalInt('FASTUPLOAD_LIMIT_FILE_NUMBER') : 50; ?>,
+				maxFiles: <?php echo getDolGlobalInt('FASTUPLOAD_LIMIT_FILE_NUMBER',50); ?>,
 				dictDefaultMessage: "<?php echo addslashes($langs->transnoentities('FastUpload_DefaultMessage')); ?>",
 				dictFallbackMessage: "<?php echo addslashes($langs->transnoentities('FastUpload_FallbackMessage')); ?>",
 				dictFallbackText: "<?php echo addslashes($langs->transnoentities('FastUpload_FallbackText')); ?>",
