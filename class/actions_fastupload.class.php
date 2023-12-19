@@ -26,7 +26,10 @@
 /**
  * Class ActionsFastUpload
  */
-class ActionsFastUpload
+
+require_once __DIR__ . '/../backport/v19/core/class/commonhookactions.class.php';
+
+class ActionsFastUpload extends \fastupload\RetroCompatCommonHookActions
 {
 	/**
 	 * @var array Hook results. Propagated to $hookmanager->resArray for later reuse
@@ -96,16 +99,16 @@ class ActionsFastUpload
 		$jsLangs->setDefaultLang($langs->defaultlang);
 		$jsLangs->load('fastupload@fastupload');
 
-		$phpContext = array(
-			'hookContexts' => $TContext,
-			'options' => isset($parameters['options']) ? $parameters['options'] : null,
-			'conf' => array_filter(
-				(array)$conf->global,
-				function ($v) { return strpos($v, 'FASTUPLOAD') !== false; },
-				ARRAY_FILTER_USE_KEY
-			),
-			'langs' => $jsLangs->tab_translate,
-		);
+        $phpContext = array(
+            'hookContexts' => $TContext,
+            'options' => $parameters['options'] ?? null,
+            'conf' => array_filter(
+                (array)$conf->global,
+                function ($v) { return str_contains($v, 'FASTUPLOAD'); },
+                ARRAY_FILTER_USE_KEY
+            ),
+            'langs' => $jsLangs->tab_translate,
+        );
 
 		// pour rappel: $(<fonction>) est équivalent à $(document).ready(<fonction>)
 		$this->resprints .=
