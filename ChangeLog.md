@@ -4,6 +4,9 @@ ___
 
 ## Unreleased
 
+
+## RELEASE 1.3
+
 - NEW : compat v19 php8.2 *05/12/2023* - 1.3.0
 
 ## RELEASE 1.2
