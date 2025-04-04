@@ -29,6 +29,12 @@
 
 require_once __DIR__ . '/../backport/v19/core/class/commonhookactions.class.php';
 
+if (!function_exists('str_contains')) {
+    function str_contains($haystack, $needle): bool {
+        return $needle !== '' && mb_strpos($haystack, $needle) !== false;
+    }
+}
+
 class ActionsFastUpload extends \fastupload\RetroCompatCommonHookActions
 {
 	/**
