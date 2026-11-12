@@ -7,6 +7,7 @@ ___
 
 ## RELEASE 1.3
 
+- FIX : DA029128 - The core "New" button of the attached files tab (Dolibarr 21+) opened a file picker bound to the hidden standard form, so the chosen files were never uploaded - *12/11/2026* - 1.3.1
 - NEW : compat v19 php8.2 *05/12/2023* - 1.3.0
 
 ## RELEASE 1.2
