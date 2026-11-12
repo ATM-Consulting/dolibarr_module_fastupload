@@ -49,6 +49,7 @@ $(document).ready( function() {
 				autoProcessQueue: <?php echo !empty(getDolGlobalString('FASTUPLOAD_ENABLE_AUTOUPLOAD')) ? 'true' : 'false'; ?>,
                     addRemoveLinks: !<?php echo !empty(getDolGlobalString('FASTUPLOAD_ENABLE_AUTOUPLOAD')) ? 'true' : 'false'; ?>,
 				clickable: zone_class,
+				hiddenInputContainer: "#" + form.attr("id"),
 				previewsContainer: "#" + classPrefix + "-previews-box",
 				uploadMultiple: <?php echo (float) DOL_VERSION < 4.0 ? 'false' : 'true'; ?>,
 				parallelUploads: 100,
@@ -168,6 +169,8 @@ $(document).ready( function() {
 		dropzone_form.append($('<input type="hidden" name="fastupload_ajax" value="1" /><input type="hidden" name="token" value="<?php print $newToken; ?>" />'));
 
 
+		// The core "New" button clicks the file input of the attach area: it must be the dropzone one.
+		$formuserfile.find("input[type=file]").remove();
 		$formuserfile.hide();
 		$formuserfile.after(dropzone_form);
 
